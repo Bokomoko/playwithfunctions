@@ -3,6 +3,8 @@ import argparse
 
 def stuff(message: str) -> None:
     print(f"I can send a message just like this: \"{message}\"")
+    if hasattr(stuff, "subliminal"):
+        print(f"We're really trying to say is: \` {stuff.subliminal}\`")
     return None
 
 
@@ -13,10 +15,13 @@ def main(**kwargs) -> None:
     parser.add_argument("--subliminal", type=str, help="subliminal message to send",
                         default="No subliminal message this time")
     kwargs = parser.parse_args()
+    stuff.message = kwargs.message
+    stuff.subliminal = kwargs.subliminal
 
-    print(f"message: {kwargs.message}")
-    print(f"subliminal message: {kwargs.subliminal}")
-    print(f"Type of kwargs: {type(kwargs)}")
+    stuff(message=kwargs.message)
+
+    print(f"message: {stuff.message}")
+    print(f"subliminal message: {stuff.subliminal}")
     return None
 
 
